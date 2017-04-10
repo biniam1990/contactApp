@@ -7,8 +7,10 @@ var bodyParser = require('body-parser');
 var lessMiddleware = require('less-middleware');
 var validator = require('express-validator');
 var index = require('./routes/index');
+var contactus = require('./routes/contactus');
 var users = require('./routes/users');
-
+var thankyou = require('./routes/thankyou');
+var csrf = require('csurf');
 var app = express();
 
 // view engine setup
@@ -23,10 +25,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(validator());
 app.use(cookieParser());
+// app.use(csrf());
+
 app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/contactus', index);
+app.use(function(req,res,next){
+  res.locals.csrftoken= req.csrfToken;
+    next();
+});
+app.use('/',index);
+app.use('/contactus', contactus);
+app.use('/thankyou',thankyou);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
