@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <form action ="/contactus" method="post" >
+   Full name <input type="text" name= "fname"></br>
+      Type<label>Suggestion<input type ="radio" name ="type" value="suggestion" checked></label>
+          <label>Complaint <input type ="radio" name ="type" value="complaint"></label></br>
+    Message <textarea type ="text" name="message"> </textarea><br>
+
+    <input type ="submit" value ="submit">
+    </form>
+  </body>
+</html>
